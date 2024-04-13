@@ -20,8 +20,8 @@ export const NftDetails = (
         }
     };
     const randomNFTValue = ()=>{
-        const demand = Math.random()* 100;
-        const rarity = Math.random()*100;
+        const demand = Math.random()* 1000;
+        const rarity = Math.random()*1000;
         const rarityWeight = 0.6;
         const demandWeight = 0.4;
 
@@ -49,7 +49,7 @@ return(
         <img src={image} height="250px" width="250px" alt={`NFT ${index}`} />
         <p>Token ID: {nft.nft.tokenId}</p>
         <p>Owner: {nft.nft.owner}</p>
-        <p> Estimated Value : {value}</p>
+        <p> Estimated Value : {value} USD</p>
         <input type="text" onChange={(e)=>canLend(e)} value={amt} />
         <button disabled={disabled} onClick={()=>{lendAmount()}}>Loan this amount </button>
     </div>
