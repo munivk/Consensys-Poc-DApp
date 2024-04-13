@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import detectEthereumProvider from "@metamask/detect-provider";
 import Web3 from "web3";
 import { contractABI } from './contractABI.js';
+import "./App.css";
+import NftDetails from "./NftDetails.jsx";
 
-const contractAddress = '0x1A338C199D78392604c276CCa9e71a4786bC5189';
+const contractAddress = '0xE33041504B044770B22b92120DD2382001718fEc';
 
 const App = () => {
     const [hasProvider, setHasProvider] = useState();
@@ -11,6 +13,7 @@ const App = () => {
     const [wallet, setWallet] = useState(initialState);
     const [nfts, setNfts] = useState([]);
     const [loading, setLoading] = useState(false);
+    
 
     useEffect(() => {
         const refreshAccounts = async (accounts) => {
@@ -59,7 +62,8 @@ const App = () => {
                 for (let i = 0; i < totalSupply; i++) {
                     let tokenId = i + 1;
                     const owner = await contract.methods.ownerOf(tokenId).call();
-                    const tokenURI = await contract.methods.tokenURI(tokenId).call();   
+                    const tokenURI = await contract.methods.tokenURI(tokenId).call();
+                    console.log("Fetching Json details...");
                     nftsData.push({ tokenId, owner, tokenURI });
                 }
                 setNfts(nftsData);
@@ -83,11 +87,13 @@ const App = () => {
         }
     };
 
+    
+
     return (
         <div className="App">
             <div>
                 {/* Make sure mmLogo is properly imported */}
-                {/* <img src={mmLogo} alt="logo" /> */}
+                 <img src='/metamask-logo.jpeg' alt="logo" /> 
             </div>
 
             {window.ethereum?.isMetaMask && 
@@ -98,17 +104,15 @@ const App = () => {
             {wallet.accounts.length > 0 && (
                 <div>Wallet Accounts: {wallet.accounts[0]}</div>
             )}
-
+            <hr height='2px' width='50%'/>
             <h1>NFT Viewer</h1>
             {loading && <p>Loading NFTs...</p>}
             <div className="nft-list">
-                {nfts.map((nft, index) => (
-                    <div className="nft-card" key={index}>
-                        <img src={nft.tokenURI} height="250px" width="250px" alt={`NFT ${index}`} />
-                        <p>Token ID: {nft.tokenId}</p>
-                        <p>Owner: {nft.owner}</p>
-                    </div>
-                ))}
+                {nfts.map((nft, index) => 
+                    (<div className="nft-card" key={index}>
+                    <NftDetails nft={nft} index={index}></NftDetails>
+                </div>)
+                )}
             </div>
         </div>
     );
