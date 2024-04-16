@@ -105,21 +105,21 @@ const App = () => {
 
     return (
         <div className="App">
-            <div>
-                {/* Make sure mmLogo is properly imported */}
-                 <img src='/metamask-logo.jpeg' alt="logo" /> 
-            </div>
+            <header>
+            <h1> Lending & Borrowing DApp </h1>
+            </header>
+            
 
             {window.ethereum?.isMetaMask && 
                 wallet.accounts.length < 1 && (                       
-                    <button onClick={handleConnect}>Connect MetaMask</button>
+                    <button onClick={handleConnect}><h3>Connect MetaMask</h3></button>
                 )}
 
             {wallet.accounts.length > 0 && (
                 <div>Wallet Accounts: {wallet.accounts[0]}</div>
             )}
-            <hr height='2px' width='50%'/>
-            <h1>NFT Viewer</h1>
+            <hr height='2px' width='75%'/>
+            <h2>NFT Dashboard</h2>
             {loading && <p>Loading NFTs...</p>}
             <div className="Nft-list">
                 {nfts.map((nft, index) => 
