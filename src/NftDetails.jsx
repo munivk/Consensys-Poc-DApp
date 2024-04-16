@@ -5,20 +5,18 @@ export const NftDetails = (
    index=0
 )=> {
 
-    const [image, setImage] = useState('');
     const [value, setValue] = useState(0);
     const [disabled, setDisabled] = useState(true);
     const [amt, setAmt] = useState(0)
-    const getNftImage = async (nft) => {
-        try {
-                const nftDetails = await fetch(nft);
-                const nftDetailsObj = await nftDetails.json();
-                setImage (nftDetailsObj.image);
-        }
-        catch (error) {
-            console.error('Error in fetching Json:', nft);
-        }
-    };
+    // const getNftImage = async (nft) => {
+    //     try {
+    //             const nftDetails = await fetch(nft);
+    //             const nftDetailsObj = await nftDetails.json();
+    //     }
+    //     catch (error) {
+    //         console.error('Error in fetching Json:', nft);
+    //     }
+    // };
     const randomNFTValue = ()=>{
         const demand = Math.random()* 1000;
         const rarity = Math.random()*1000;
@@ -30,7 +28,7 @@ export const NftDetails = (
         setValue(value.toFixed(2));
     }
     useEffect(()=>{
-        getNftImage(nft.nft.tokenURI);
+        //getNftImage(nft.nft.tokenURI);
         randomNFTValue();
     },[]);
    const canLend =(event)=>{
@@ -46,7 +44,8 @@ export const NftDetails = (
    }
 return(
     <div className="container">
-        <img src={image} height="250px" width="250px" alt={`NFT ${index}`} />
+        <img src={nft.nft.tokenURI} height="250px" width="250px" alt={`NFT ${index}`} />
+        <p>NFT Uri: {nft.nft.tokenURI.slice('https://gateway.pinata.cloud/ipfs/'.length)} </p>
         <p>Token ID: {nft.nft.tokenId}</p>
         <p>Owner: {nft.nft.owner}</p>
         <p> Estimated Value : {value} USD</p>
