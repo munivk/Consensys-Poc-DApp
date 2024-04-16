@@ -45,7 +45,7 @@ export const NftDetails = (
 return(
     <div className="container">
         <img src={nft.nft.tokenURI} height="250px" width="250px" alt={`NFT ${index}`} />
-        <p>NFT Uri: {nft.nft.tokenURI.slice('https://gateway.pinata.cloud/ipfs/'.length)} </p>
+        <p>IPFS CID: {nft.nft.tokenURI.slice('https://gateway.pinata.cloud/ipfs/'.length)} </p>
         <p>Token ID: {nft.nft.tokenId}</p>
         <p>Owner: {nft.nft.owner}</p>
         <p> Estimated Value : {value} USD</p>
