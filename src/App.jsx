@@ -56,6 +56,8 @@ const App = () => {
         try {
             if (window.ethereum) {
                 web3 = new Web3(window.ethereum);
+                //web3 = new Web3(new Web3.providers.WebsocketProvider(infuraWebSocketURL));
+                console.log("web3", web3);
                 await window.ethereum.request({ method: 'eth_requestAccounts' });
                 const accounts = await web3.eth.getAccounts();
                 console.log("Account:", accounts[0]);
